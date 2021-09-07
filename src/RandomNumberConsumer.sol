@@ -4,6 +4,8 @@ import "../chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
 contract RandomNumberConsumer is VRFConsumerBase {
     
+	bool forTestingPurposes;    // Boolean to run test on this contract
+	
     bytes32 internal keyHash;
     uint256 internal fee;
     
@@ -40,5 +42,10 @@ function getRandomNumber() public returns (bytes32 requestId) {
      */
     function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
         randomResult = randomness;
+    }
+	
+	// Getter function for the forTestingPurposes boolean.
+    function getForTestingPurposes() public view returns (bool){   
+        return forTestingPurposes;
     }
 }
