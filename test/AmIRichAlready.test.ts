@@ -39,4 +39,13 @@ describe('Am I Rich Already', () => {
       .returns(utils.parseEther('1000000'));
     expect(await contract.check()).to.be.equal(false);
   });
+  
+  // custom test
+  it('returns false if the contract test is not solved', async () => {
+    await mockERC20.mock.balanceOf
+      .withArgs(wallet.address)
+      .returns(utils.parseEther('1000000'));
+    expect(await contract.getSolved()).to.be.equal(false);
+  });
+  
 });
