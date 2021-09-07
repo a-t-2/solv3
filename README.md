@@ -1,6 +1,7 @@
 # Unit Test Solidity Contracts
 
 ## Installation
+First run a sudo command like `sudo true` to make sure you have sudo rights before you run sudo apt install npm (I think otherwise the next line with the `npm install` might be seen as a password attempt). 
 ```
 git clone git@github.com:a-t-2/chainlink.git
 git clone git@github.com:a-t-2/test_vrf3.git
