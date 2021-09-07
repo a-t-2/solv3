@@ -6,6 +6,7 @@ First run a sudo command like `sudo true` to make sure you have sudo rights befo
 git clone git@github.com:a-t-2/chainlink.git
 git clone git@github.com:a-t-2/test_vrf3.git
 cd test_vrf3
+sudo chmod +x run_tests.sh
 sudo apt install npm
 npm install
 npm audit fix
@@ -13,6 +14,7 @@ npm install --save-dev ethereum-waffle
 npm install @openzeppelin/contracts -D
 npm i chai -D
 npm i mocha -D
+rm -r build
 npx waffle
 npx mocha
 npm test
@@ -20,7 +22,11 @@ npm test
 ## Testing
 Everytime you change something in the code, and you want to test it, run:
 ```
+rm -r build
 npx waffle
-npx mocha
 npm test
+```
+Or just run:
+```
+./run_tests.sh
 ```
