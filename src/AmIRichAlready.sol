@@ -20,7 +20,7 @@ contract AmIRichAlready {
 		// specify ask root constructor variables
 		solved = false;         //  Boolean value to indicate if contract is already solved.
         owner = msg.sender;     //  Set the owner of the contract to the creator of the contract.
-        expiry = 1812569800;    //  Unix timestamp of the moment of expiry.
+        expiry = 1612569800;    //  Unix timestamp of the moment of expiry.
     }
 
     function check() public view returns (bool) {

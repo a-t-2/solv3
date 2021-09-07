@@ -25,6 +25,11 @@ describe('Am I Rich Already', () => {
     solveContract = await deployContract(wallet, SolveContract, [mockERC20.address]);
   });
 
+	// custom test in solveContract
+  it('returns 7 after solving the askcontract', async () => {
+    expect(await solveContract.solve()).to.be.equal(7);
+  });
+
   // custom test in solveContract
   it('returns false if the solveContract test is not solved', async () => {
     expect(await solveContract.getForTestingPurposes()).to.be.equal(false);

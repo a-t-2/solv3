@@ -16,8 +16,9 @@ contract SolveContract {
     }
     
     // Function to solve the testContract.
-    function solve() public payable{
+    function solve() public payable returns(uint256){
         testContract.differentFunctionName(owner);
+		return owner.balance;
     }
 
     // Example of the main function which solves the testContract.
