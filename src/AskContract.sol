@@ -47,6 +47,6 @@ contract AskContract {
 }
 
 // TemplateSolveContract so the TestContract knows the structure of the SolveContract.
-contract TemplateSolveContract {
-	function main(uint x) public returns (uint);
+abstract contract TemplateSolveContract {
+	function main(uint x) public virtual returns (uint);
 }

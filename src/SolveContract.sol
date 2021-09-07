@@ -31,6 +31,6 @@ contract SolveContract {
 }
 
 // TemplateTestContract so the SolveContract knows the structure of the testContract.
-contract TemplateTestContract {
-    function test(address payable hunter) public;
+abstract contract TemplateTestContract {
+    function test(address payable hunter) public virtual;
 }
