@@ -2,31 +2,9 @@
 
 ## Installation
 ```
-sudo apt install npm
-npm install
-npm audit fix
-npm install --save-dev ethereum-waffle
-npm install @openzeppelin/contracts -D
-npm i chai -D
-npm i mocha -D
-```
-
-## Compiling the tests
-```
-npx waffle
-```
-To compile using a custom configuration file run:
-```
-npx waffle config.json
-```
-## Running the tests
-```
-npx mocha
-npm test
-```
-
-## Slow copy paste:
-```
+git clone git@github.com:a-t-2/chainlink.git
+git clone test_vrf3
+cd test_vrf3
 sudo apt install npm
 npm install
 npm audit fix
@@ -38,14 +16,9 @@ npx waffle
 npx mocha
 npm test
 ```
-
-## Fast copy paste:
+## Testing
+Everytime you change something in the code, and you want to test it, run:
 ```
-sudo apt install npm
-npm install --save-dev ethereum-waffle
-npm install @openzeppelin/contracts -D
-npm i chai -D
-npm i mocha -D
 npx waffle
 npx mocha
 npm test
