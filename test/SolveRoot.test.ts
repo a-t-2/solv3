@@ -13,6 +13,10 @@ describe('Am I Rich Already', () => {
   let contract: Contract;
   let solveContract: Contract;
   let wallet: Wallet;
+  
+  // Define testing variables
+  //uint x = 100;                                   // Sample input.
+  //uint16 y = 10;                                  // Sample expected output.
 
   beforeEach(async () => {
     [wallet] = new MockProvider().getWallets();
@@ -28,7 +32,14 @@ describe('Am I Rich Already', () => {
 
   // custom test in solveContract
   it('returns 10 if the solve function receives 100', async () => {
-    expect(await solveContract.getForTestingPurposes()).to.be.equal(false);
+    //expect(await solveContract.main(x)).to.be.equal(y);
+    expect(await solveContract.main(100)).to.be.equal(10);
+  });
+
+  // custom test in solveContract
+  it('Trows error if expect returns 9 if the solve function receives 100', async () => {
+    //expect(await solveContract.main(x)).to.be.equal(y);
+    expect(await solveContract.main(100)).to.be.equal(9);
   });
 
 
