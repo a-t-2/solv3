@@ -36,4 +36,9 @@ describe('Am I Rich Already', () => {
     expect(await vrfContract.getForTestingPurposes()).to.be.equal(false);
   });
   
+  // custom test in vrfContract
+  it('Tests if a random number is returned', async () => {
+    expect(await vrfContract.getRandomNumber()).to.be.equal(7);
+  });
+  
 });
