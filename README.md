@@ -3,7 +3,7 @@
 ## Installation
 ```
 git clone git@github.com:a-t-2/chainlink.git
-git clone test_vrf3
+git clone git@github.com:a-t-2/test_vrf3.git
 cd test_vrf3
 sudo apt install npm
 npm install
