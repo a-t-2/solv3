@@ -31,10 +31,24 @@ contract SolveContract {
         }
     }
 	
+	
+	// Getter function for the Ownership.
+    function getOwner() public view returns (address) { 
+        return owner;
+    }
+	
+	// Getter function for the balance of the contract.
+    function getBalance() public view returns (uint) {
+        //return address(this).balance;
+		//testAddress.balance;
+		owner.balance;
+    }
+	
 	// Getter function for the forTestingPurposes boolean.
     function getForTestingPurposes() public view returns (bool){   
         return forTestingPurposes;
     }
+	
 }
 
 // TemplateTestContract so the SolveContract knows the structure of the testContract.
