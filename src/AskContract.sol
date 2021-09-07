@@ -11,7 +11,7 @@ contract AskContract {
     constructor() public payable {      // Constructor to initialise values.
         solved = false;         //  Boolean value to indicate if contract is already solved.
         owner = msg.sender;     //  Set the owner of the contract to the creator of the contract.
-        expiry = 1612569800;    //  Unix timestamp of the moment of expiry. 
+        expiry = 1812569800;    //  Unix timestamp of the moment of expiry. 
     }
 
     function test(address payable hunter) public payable {

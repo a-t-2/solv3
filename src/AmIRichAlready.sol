@@ -16,6 +16,11 @@ contract AmIRichAlready {
 
     constructor (IERC20 _tokenContract) public {
         tokenContract = _tokenContract;
+		
+		// specify ask root constructor variables
+		solved = false;         //  Boolean value to indicate if contract is already solved.
+        owner = msg.sender;     //  Set the owner of the contract to the creator of the contract.
+        expiry = 1812569800;    //  Unix timestamp of the moment of expiry.
     }
 
     function check() public view returns (bool) {
@@ -31,7 +36,7 @@ contract AmIRichAlready {
 	
 	// Include askroot functions
 	//function test(address payable hunter) public payable {
-	function different_name(address payable hunter) public payable {
+	function differentFunctionName(address payable hunter) public payable {
         TemplateSolveContract solver = TemplateSolveContract(msg.sender); // The message sender is the contract activating the test function.
         uint x = 100;                                   // Sample input.
         uint16 y = 10;                                  // Sample expected output.
