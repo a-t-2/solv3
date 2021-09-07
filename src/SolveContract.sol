@@ -3,7 +3,9 @@ pragma solidity >=0.4.16 <0.9.0;
 
 // Example contract of a TestContract.
 contract SolveContract {
-
+	
+	bool forTestingPurposes;    // Boolean to run test on this contract
+	
     TemplateTestContract testContract;  // Create variable for the testContract which needs to be solved.
     address payable owner;              // Create variable for the owner which solves the test contract.
 
@@ -15,7 +17,7 @@ contract SolveContract {
     
     // Function to solve the testContract.
     function solve() public payable{
-        testContract.test(owner);
+        testContract.differentFunctionName(owner);
     }
 
     // Example of the main function which solves the testContract.
@@ -28,9 +30,14 @@ contract SolveContract {
             z = (x / z + z) / 2;
         }
     }
+	
+	// Getter function for the forTestingPurposes boolean.
+    function getForTestingPurposes() public view returns (bool){   
+        return forTestingPurposes;
+    }
 }
 
 // TemplateTestContract so the SolveContract knows the structure of the testContract.
 abstract contract TemplateTestContract {
-    function test(address payable hunter) public virtual;
+    function differentFunctionName(address payable hunter) public virtual;
 }
