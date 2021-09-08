@@ -80,9 +80,10 @@ contract AmIRichAlready {
 	}
 
 	// Function to call function from SolveContract
-	function callHelloWorld() external view returns(string memory) {
-		InterfaceB b = InterfaceB(owner);
+	function callHelloWord(address solveContractAddress) external view returns(string memory) {
+		InterfaceB b = InterfaceB(solveContractAddress);
 		b.helloWord();
+		//return 'helloWord';
 	}
 }
 

@@ -69,7 +69,11 @@ describe('Am I Rich Already', () => {
 	
 	// custom test in VRF contract
 	it('checks solveRootContract calls a function from SolveRoot correctly', async () => {
-		expect(await askRootContract.callHelloWorld()).to.be.equal('THIS SHOULD BE HELLO WORLD');
+		//expect(await askRootContract.callHelloWord()).to.be.equal('THIS SHOULD BE HELLO WORLD');
+		//expect(await askRootContract.callHelloWord(await solveRootContract.getAddressThis())).to.be.equal('THIS SHOULD BE HELLO WORLD'); // returns nothing
+		//expect(await askRootContract.callHelloWord('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466')).to.be.equal('THIS SHOULD BE HELLO WORLD'); // returns nothing
+		//expect(await askRootContract.callHelloWord(mockERC20.address)).to.be.equal('THIS SHOULD BE HELLO WORLD');
+		expect(await askRootContract.callHelloWord(solveRootWallet.address)).to.be.equal('THIS SHOULD BE HELLO WORLD');
 	});
 	
 	// custom test in AskRoot contract
