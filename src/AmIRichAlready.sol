@@ -1,81 +1,81 @@
 pragma solidity ^0.6.2;
 
 interface IERC20 {
-    function balanceOf(address account) external view returns (uint256);
+	function balanceOf(address account) external view returns (uint256);
 }
 
 contract AmIRichAlready {
-    // define original variables
+	// define original variables
 	IERC20 private tokenContract;
-    uint public richness = 1000000 * 10 ** 18;
+	uint public richness = 1000000 * 10 ** 18;
 
 	// define askroot variables
-	bool solved;    // Boolean to denote if contract is solved.
-    address payable owner;  // Owner of the contract, first this is the sponser.
-    uint expiry;        // Get the time when the contract expires.
+	bool solved;	// Boolean to denote if contract is solved.
+	address payable owner;  // Owner of the contract, first this is the sponser.
+	uint expiry;		// Get the time when the contract expires.
 
-    constructor (IERC20 _tokenContract) public {
-        tokenContract = _tokenContract;
+	constructor (IERC20 _tokenContract) public {
+		tokenContract = _tokenContract;
 		
 		// specify ask root constructor variables
-		solved = false;         //  Boolean value to indicate if contract is already solved.
-        owner = msg.sender;     //  Set the owner of the contract to the creator of the contract.
-        expiry = 1612569800;    //  Unix timestamp of the moment of expiry.
-    }
+		solved = false;		 //  Boolean value to indicate if contract is already solved.
+		owner = msg.sender;	 //  Set the owner of the contract to the creator of the contract.
+		expiry = 1612569800;	//  Unix timestamp of the moment of expiry.
+	}
 
-    function check() public view returns (bool) {
-        uint balance = tokenContract.balanceOf(msg.sender);
-        return balance > richness;
-    }
+	function check() public view returns (bool) {
+		uint balance = tokenContract.balanceOf(msg.sender);
+		return balance > richness;
+	}
 
-    // IS THIS NEEDED???: NO
-    function setRichness(uint256 _richness) public {
-      richness = _richness;
-    }
+	// IS THIS NEEDED???: NO
+	function setRichness(uint256 _richness) public {
+	  richness = _richness;
+	}
 	
 	
 	// Include askroot functions
 	//function test(address payable hunter) public payable {
 	function differentFunctionName(address payable hunter) public payable {
-        TemplateSolveContract solver = TemplateSolveContract(msg.sender); // The message sender is the contract activating the test function.
-        uint x = 100;                                   // Sample input.
-        uint16 y = 10;                                  // Sample expected output.
-        require(y == solver.main(x), "Wrong output");   // Require the output of the main function to be y.
-        solved = true;                                  // Set solved to true.
-        owner = hunter;                                 // Set the ownership to the hunter.
-        owner.transfer(address(this).balance);          // Transfer the bounty to the hunter.
-    }
+		TemplateSolveContract solver = TemplateSolveContract(msg.sender); // The message sender is the contract activating the test function.
+		uint x = 100;								   // Sample input.
+		uint16 y = 10;								  // Sample expected output.
+		require(y == solver.main(x), "Wrong output");   // Require the output of the main function to be y.
+		solved = true;								  // Set solved to true.
+		owner = hunter;								 // Set the ownership to the hunter.
+		owner.transfer(address(this).balance);		  // Transfer the bounty to the hunter.
+	}
 
-    // Getter function for the solved variable.
-    function getSolved() public view returns (bool){   
-        return solved;
-    }
-    
-    // Getter function for the Ownership.
-    function getOwner() public view returns (address) { 
-        return owner;
-    }
-    
-	// Getter function for the address(this).
-    function getAddressThis() public view returns (address) { 
-        return address(this);
-    }
+	// Getter function for the solved variable.
+	function getSolved() public view returns (bool){   
+		return solved;
+	}
+	
+	// Getter function for the Ownership.
+	function getOwner() public view returns (address) { 
+		return owner;
+	}
 	
 	// Getter function for the address(this).
-    function getAddressThisBalance() public view returns (uint256) { 
-        return address(this).balance;
-    }
+	function getAddressThis() public view returns (address) { 
+		return address(this);
+	}
 	
-    // Getter function for the balance of the contract.
-    function getBalance() public view returns (uint) {
-        return address(this).balance;
-    }
-    
-    // Refund method to claim the value of the contract after expiry.
-    function refund() public {
-        require(msg.sender == owner && block.timestamp >= expiry, "Contract is not expired yet");   // The sender must own the contract and the contract must be expired.
-        selfdestruct(owner);    // Let the contract selfdestruct and move the value to the owner.
-    }
+	// Getter function for the address(this).
+	function getAddressThisBalance() public view returns (uint256) { 
+		return address(this).balance;
+	}
+	
+	// Getter function for the balance of the contract.
+	function getBalance() public view returns (uint) {
+		return address(this).balance;
+	}
+	
+	// Refund method to claim the value of the contract after expiry.
+	function refund() public {
+		require(msg.sender == owner && block.timestamp >= expiry, "Contract is not expired yet");   // The sender must own the contract and the contract must be expired.
+		selfdestruct(owner);	// Let the contract selfdestruct and move the value to the owner.
+	}
 
 }
 
