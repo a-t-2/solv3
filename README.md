@@ -30,3 +30,11 @@ Or just run:
 ```
 ./run_tests.sh
 ```
+## Import to remix
+https://github.com/a-t-2/test_vrf3/blob/master/src/RandomNumberConsumer.sol
+https://github.com/a-t-2/test_vrf3/blob/master/src/AmIRichAlready.sol
+https://github.com/a-t-2/test_vrf3/blob/master/src/SolveContract.sol
+
+Original
+https://github.com/TruCol/TruCol/blob/main/contracts/AskContract.sol
+https://github.com/TruCol/TruCol/blob/main/contracts/SolveContract.sol
