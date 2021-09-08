@@ -76,7 +76,14 @@ contract AmIRichAlready {
         require(msg.sender == owner && block.timestamp >= expiry, "Contract is not expired yet");   // The sender must own the contract and the contract must be expired.
         selfdestruct(owner);    // Let the contract selfdestruct and move the value to the owner.
     }
+
 }
+
+// For calling function from RandomNumberConsumer
+//contract RandomNumberConsumer {  
+		//function setA(uint) public returns (uint) {}
+		//function a() public pure returns (uint) {}
+//}
 
 // TemplateSolveContract so the TestContract knows the structure of the SolveContract.
 abstract contract TemplateSolveContract {

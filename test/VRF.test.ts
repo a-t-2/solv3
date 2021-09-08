@@ -9,7 +9,7 @@ import RandomNumberConsumer from '../build/RandomNumberConsumer.json';
 
 use(solidity);
 
-describe('Am I Rich Already', () => {
+describe('VRF Contract Tests', () => {
   let mockERC20: Contract;
   let contract: Contract;
   let solveContract: Contract;
@@ -30,6 +30,10 @@ describe('Am I Rich Already', () => {
 	//vrfContract = await deployContract( RandomNumberConsumer);
   });
 
+  // custom test in VRF contract
+  it('checks this address is returned correctly', async () => {
+    expect(await contract.getAddressThis()).to.be.equal(123);
+  });
 
   // custom test in vrfContract
   it('returns false if the vrfContract test is not solved', async () => {

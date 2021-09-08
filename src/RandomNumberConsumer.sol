@@ -48,4 +48,23 @@ function getRandomNumber() public returns (bytes32 requestId) {
     function getForTestingPurposes() public view returns (bool){   
         return forTestingPurposes;
     }
+	
+	// Getter function for the address(this).
+    function getAddressThis() public view returns (address) { 
+        return address(this);
+    }
+	
+	// Getter function for hardcoded random number.
+    function getHardcodedRandomNumber() public view returns (uint){   
+        uint hardcodedRandomNumber = 121;
+		return hardcodedRandomNumber;
+    }
+	
+	
+	 //uint public a = 144;
+    //function setA(uint _a) public returns (uint) {
+        //a = _a;
+        //return a;
+    //}
+	
 }
