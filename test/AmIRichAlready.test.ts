@@ -4,33 +4,75 @@ import {deployContract, deployMockContract, MockProvider, solidity} from 'ethere
 
 import IERC20 from '../build/IERC20.json';
 import AmIRichAlready from '../build/AmIRichAlready.json';
+import SolveContract from '../build/SolveContract.json';
+import RandomNumberConsumer from '../build/RandomNumberConsumer.json';
 
 use(solidity);
 
 describe('Am I Rich Already', () => {
+	// Declare contracts
 	let mockERC20: Contract;
 	let askRootContract: Contract;
+	let solveRootContract: Contract;
+	let vrfContract: Contract;
+	
+	// Declare wallets
 	let mockWallet: Wallet;
 	let askRootWallet: Wallet;
 	let solveRootWallet: Wallet;
 	let vrfWallet: Wallet;
 
 	beforeEach(async () => {
-		[mockWallet, askRootWallet, solveRootWallet, vrfWallet] = new MockProvider().getWallets();
+		
+		// generate random wallets or random origin 
+		//const [mockWallet, askRootWallet, solveRootWallet, vrfWallet] = Wallet.createRandom();
+		//const original = Wallet.createRandom();
+		
+		// specify wallet balances
+		const provider = new MockProvider(
+			{
+				ganacheOptions: {
+					// The private key is used to generate the four respective wallet addresses.
+					accounts: [
+						{balance: '16862680000000000001', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c1'}, 
+						{balance: '16862680000000000002', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c2'}, 
+						{balance: '16862680000000000003', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c3'},
+						{balance: '16862680000000000004', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c4'}
+					]
+				}
+			}
+		);
+		
+		[mockWallet, askRootWallet, solveRootWallet, vrfWallet] = provider.getWallets();
 		mockERC20 = await deployMockContract(mockWallet, IERC20.abi);
 		askRootContract = await deployContract(askRootWallet, AmIRichAlready, [mockERC20.address]);
+		solveRootContract = await deployContract(solveRootWallet, SolveContract, [mockERC20.address]);
+		vrfContract = await deployContract(vrfWallet, RandomNumberConsumer);
 	});
 
 	// custom test in AskRoot contract
 	it('checks askRootContract address is returned correctly', async () => {
-		expect(await askRootContract.getAddressThis()).to.be.equal('0x54421e7a0325cCbf6b8F3A28F9c176C77343b7db');
+		expect(await askRootContract.getAddressThis()).to.be.equal('0x82A666453d8aa239eEBE4578E83cD0988D62c83F');
 	});
 	
 	// custom test in AskRoot contract
-	it('checks this address balance is returned correctly', async () => {
+	it('checks askRootWallet address balance is returned correctly', async () => {
 		expect(await askRootContract.getAddressThisBalance()).to.be.equal(9001);
 	});
 	
+	
+	// custom test in VRF contract
+	it('checks solveRootContract wallet address is returned correctly', async () => {
+		expect(await solveRootContract.getAddressThis()).to.be.equal('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466');
+	});
+	
+	// custom test in AskRoot contract
+	it('checks solveRootWallet address balance is returned correctly', async () => {
+		await mockERC20.mock.balanceOf
+			.withArgs(askRootWallet.address)
+			.returns(utils.parseEther('9002'));
+		expect(await solveRootContract.getAddressThis().balance).to.be.equal(9002);
+	});
 
 	it('checks if askRootContract called balanceOf with certain askRootWallet on the ERC20 token', async () => {
 		await mockERC20.mock.balanceOf

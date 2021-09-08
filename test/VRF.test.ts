@@ -10,10 +10,13 @@ import RandomNumberConsumer from '../build/RandomNumberConsumer.json';
 use(solidity);
 
 describe('VRF Contract Tests', () => {
+	// Declare contracts
 	let mockERC20: Contract;
 	let askRootContract: Contract;
 	let solveRootContract: Contract;
 	let vrfContract: Contract;
+	
+	// Declare wallets
 	let mockWallet: Wallet;
 	let askRootWallet: Wallet;
 	let solveRootWallet: Wallet;
@@ -29,8 +32,6 @@ describe('VRF Contract Tests', () => {
 		askRootContract = await deployContract(askRootWallet, AmIRichAlready, [mockERC20.address]);
 		solveRootContract = await deployContract(solveRootWallet, SolveContract, [mockERC20.address]);
 		vrfContract = await deployContract(vrfWallet, RandomNumberConsumer);
-		//vrfContract = await deployContract(wallet, RandomNumberConsumer, [mockERC20.address]);
-	//vrfContract = await deployContract( RandomNumberConsumer);
 	});
 
 	// custom test in VRF contract
