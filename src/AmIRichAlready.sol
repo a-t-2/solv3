@@ -56,6 +56,16 @@ contract AmIRichAlready {
         return owner;
     }
     
+	// Getter function for the address(this).
+    function getAddressThis() public view returns (address) { 
+        return address(this);
+    }
+	
+	// Getter function for the address(this).
+    function getAddressThisBalance() public view returns (uint256) { 
+        return address(this).balance;
+    }
+	
     // Getter function for the balance of the contract.
     function getBalance() public view returns (uint) {
         return address(this).balance;

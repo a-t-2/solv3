@@ -18,6 +18,17 @@ describe('Am I Rich Already', () => {
     contract = await deployContract(wallet, AmIRichAlready, [mockERC20.address]);
   });
 
+  // custom test in AskRoot contract
+  it('checks this address is returned correctly', async () => {
+    expect(await contract.getAddressThis()).to.be.equal(123);
+  });
+  
+  // custom test in AskRoot contract
+  it('checks this address is returned correctly', async () => {
+    expect(await contract.getAddressThisBalance()).to.be.equal(9001);
+  });
+  
+
   it('checks if contract called balanceOf with certain wallet on the ERC20 token', async () => {
     await mockERC20.mock.balanceOf
       .withArgs(wallet.address)
