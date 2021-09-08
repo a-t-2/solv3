@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.16 <0.9.0;
 
+abstract contract InterfaceB{
+	function helloWord() virtual external pure returns(string memory);
+}
+
 // Example contract of a TestContract.
 contract SolveContract {
 	
@@ -55,6 +59,10 @@ contract SolveContract {
         return forTestingPurposes;
     }
 	
+	// function to be called from another contract
+	function helloWord() external pure returns(string memory) {
+		return 'helloWord';
+	}
 }
 
 // TemplateTestContract so the SolveContract knows the structure of the testContract.

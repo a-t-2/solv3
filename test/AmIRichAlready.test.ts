@@ -67,6 +67,11 @@ describe('Am I Rich Already', () => {
 		expect(await solveRootContract.getAddressThis()).to.be.equal('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466');
 	});
 	
+	// custom test in VRF contract
+	it('checks solveRootContract calls a function from SolveRoot correctly', async () => {
+		expect(await askRootContract.callHelloWorld()).to.be.equal('THIS SHOULD BE HELLO WORLD');
+	});
+	
 	// custom test in AskRoot contract
 	it('checks solveRootWallet address balance is returned correctly', async () => {
 		await mockERC20.mock.balanceOf

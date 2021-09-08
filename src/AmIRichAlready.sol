@@ -1,5 +1,7 @@
 pragma solidity ^0.6.2;
 
+import "src/SolveContract.sol";
+
 interface IERC20 {
 	function balanceOf(address account) external view returns (uint256);
 }
@@ -77,6 +79,11 @@ contract AmIRichAlready {
 		selfdestruct(owner);	// Let the contract selfdestruct and move the value to the owner.
 	}
 
+	// Function to call function from SolveContract
+	function callHelloWorld() external view returns(string memory) {
+		InterfaceB b = InterfaceB(owner);
+		b.helloWord();
+	}
 }
 
 // For calling function from RandomNumberConsumer
