@@ -8,7 +8,7 @@ import SolveContract from '../build/SolveContract.json';
 
 use(solidity);
 
-describe('Am I Rich Already', () => {
+describe('AskRootContract Tests', () => {
   let mockERC20: Contract;
   let contract: Contract;
   let solveContract: Contract;

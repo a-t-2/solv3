@@ -34,10 +34,10 @@ describe('Am I Rich Already', () => {
 				ganacheOptions: {
 					// The private key is used to generate the four respective wallet addresses.
 					accounts: [
-						{balance: '16862680000000000001', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c1'}, 
-						{balance: '16862680000000000002', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c2'}, 
-						{balance: '16862680000000000003', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c3'},
-						{balance: '16862680000000000004', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c4'}
+						{balance: '168626800000000000000001', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c1'}, 
+						{balance: '168626800000000000000002', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c2'}, 
+						{balance: '168626800000000000000003', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c3'},
+						{balance: '168626800000000000000004', secretKey: '0x706618637b8ca922f6290ce1ecd4c31247e9ab75cf0530a0ac95c0332173d7c4'}
 					]
 				}
 			}
@@ -46,6 +46,7 @@ describe('Am I Rich Already', () => {
 		[mockWallet, askRootWallet, solveRootWallet, vrfWallet] = provider.getWallets();
 		mockERC20 = await deployMockContract(mockWallet, IERC20.abi);
 		askRootContract = await deployContract(askRootWallet, AmIRichAlready, [mockERC20.address]);
+		//askRootContract = await deployContract(askRootWallet, AmIRichAlready, [askRootWallet.address]); // Does not work, yields transaction revert errors
 		solveRootContract = await deployContract(solveRootWallet, SolveContract, [mockERC20.address]);
 		vrfContract = await deployContract(vrfWallet, RandomNumberConsumer);
 	});
