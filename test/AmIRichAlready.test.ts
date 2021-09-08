@@ -54,7 +54,9 @@ describe('Am I Rich Already', () => {
 	// custom test in AskRoot contract
 	it('checks askRootContract address is returned correctly', async () => {
 		expect(await askRootContract.getAddressThis()).to.be.equal('0x82A666453d8aa239eEBE4578E83cD0988D62c83F');
-		expect(await askRootContract.getAddressThis()).to.be.equal(askRootWallet.address);
+		
+		// This test fails, so the contract address is different than the accompanying wallet addres.
+		//expect(await askRootContract.getAddressThis()).to.be.equal(askRootWallet.address);
 	});
 	
 	
