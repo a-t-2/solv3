@@ -10,7 +10,7 @@ contract SolveContract {
     address payable owner;              // Create variable for the owner which solves the test contract.
 
     // Constructor to initialise the contract variables.
-    constructor(address testAddress) public payable {              
+    constructor(address testAddress) public payable {
         testContract = TemplateTestContract(testAddress);   // Initialise the testContract variable.
         owner = msg.sender;                                 // Initialise the owner of the contract to be the creator of the contract.
     }
@@ -38,11 +38,16 @@ contract SolveContract {
         return owner;
     }
 	
+	// Getter function for the address(this).
+	function getAddressThis() public view returns (address) { 
+		return address(this);
+	}
+	
 	// Getter function for the balance of the contract.
     function getBalance() public view returns (uint) {
-        //return address(this).balance;
-		//testAddress.balance;
-		owner.balance;
+        return address(this).balance;
+		//return testAddress.balance;
+		//return owner.balance;
     }
 	
 	// Getter function for the forTestingPurposes boolean.
