@@ -1,4 +1,4 @@
-pragma solidity ^0.6.2;
+pragma solidity ^0.6.6;
 
 //import 'ContractB.sol';
 import "src/ContractB.sol";
