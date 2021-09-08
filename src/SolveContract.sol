@@ -4,7 +4,7 @@ pragma solidity ^0.6.2;
 
 
 abstract contract InterfaceB{
-	function helloWord() virtual external pure returns(string memory);
+	function helloWorld() virtual external pure returns(string memory);
 }
 
 // Example contract of a TestContract.
@@ -62,8 +62,8 @@ contract SolveContract {
     }
 	
 	// function to be called from another contract
-	function helloWord() external pure returns(string memory) {
-		return 'helloWord';
+	function helloWorld() external pure returns(string memory) {
+		return 'hello World';
 	}
 }
 

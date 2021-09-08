@@ -54,7 +54,10 @@ describe('Am I Rich Already', () => {
 	// custom test in AskRoot contract
 	it('checks askRootContract address is returned correctly', async () => {
 		expect(await askRootContract.getAddressThis()).to.be.equal('0x82A666453d8aa239eEBE4578E83cD0988D62c83F');
+		expect(await askRootContract.getAddressThis()).to.be.equal(askRootWallet.address);
 	});
+	
+	
 	
 	// custom test in AskRoot contract
 	it('checks askRootWallet address balance is returned correctly', async () => {
@@ -68,13 +71,24 @@ describe('Am I Rich Already', () => {
 	});
 	
 	// custom test in VRF contract
-	it('checks solveRootContract calls a function from SolveRoot correctly', async () => {
-		//expect(await askRootContract.callHelloWord()).to.be.equal('THIS SHOULD BE HELLO WORLD');
-		//expect(await askRootContract.callHelloWord(await solveRootContract.getAddressThis())).to.be.equal('THIS SHOULD BE HELLO WORLD'); // returns nothing
-		//expect(await askRootContract.callHelloWord('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466')).to.be.equal('THIS SHOULD BE HELLO WORLD'); // returns nothing
+	it('checks askRootContract calls a function from SolveRoot correctly and returns the right answer', async () => {
+		expect(await askRootContract.callHelloWord(await solveRootContract.getAddressThis())).to.be.equal('hello World');
+		expect(await askRootContract.callHelloWord('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466')).to.be.equal('hello World');
+		expect(await askRootContract.callHelloWord("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")).to.be.equal('hello World');
 		//expect(await askRootContract.callHelloWord(mockERC20.address)).to.be.equal('THIS SHOULD BE HELLO WORLD');
-		expect(await askRootContract.callHelloWord(solveRootWallet.address)).to.be.equal('THIS SHOULD BE HELLO WORLD');
+		//expect(await askRootContract.callHelloWord(solveRootWallet.address)).to.be.equal('THIS SHOULD BE HELLO WORLD');
+		expect(await askRootContract.callHelloWord(solveRootContract.address)).to.be.equal('hello World');
 	});
+	
+	
+	// custom test in VRF contract
+	it('checks solveRootContract calls a function from SolveRoot correctly', async () => {
+		//await token.balanceOf(wallet.address)
+		//await askRootContract.callHelloWord(solveRootWallet.address)
+		await askRootContract.callHelloWord("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")
+		expect('helloWord').to.be.calledOnContract(solveRootContract);
+	});
+	
 	
 	// custom test in AskRoot contract
 	it('checks solveRootWallet address balance is returned correctly', async () => {
