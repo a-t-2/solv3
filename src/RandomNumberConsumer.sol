@@ -10,7 +10,7 @@ import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/con
 abstract contract InterfaceRandomN{
 	function helloUniverse() virtual external pure returns(string memory);
 	function getRandomNumber() virtual external returns (bytes32 requestId);
-	function returnSomeSquare() virtual external returns (uint256);
+	function returnSomeSquare() virtual external;
 }
 
 contract RandomNumberConsumer is VRFConsumerBase {
@@ -24,6 +24,9 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	uint256 public randomResult;
 	uint256 public randomResultModulo;
 	uint256 public randomResultSquared;
+	
+	uint256 public someSquare;
+	uint256 public somePublicValue = 144;
 	
 	/**
 	 * Constructor inherits VRFConsumerBase
@@ -55,9 +58,8 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	 * Callback function used by VRF Coordinator
 	 */
 	function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
-		randomResult = randomness;
-		randomResultModulo = randomResult.mod(6).add(2); // Maps random number to range 0 to 5, adds 2 to map to range 2 to 7.
-		randomResultSquared = randomResultModulo * randomResultModulo;
+		uint256 modulo = randomness.mod(6).add(2); // Maps random number to range 0 to 5, adds 2 to map to range 2 to 7.
+		randomResult = uint16(modulo * modulo);
 	}
 	
 	// Getter function for the forTestingPurposes boolean.
@@ -107,8 +109,13 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	}
 	
 	// function to be called from another contract
-	function returnSomeSquare()  public returns (uint256) {
-		uint256 someSquare = 144;
-		return someSquare;
+	function returnSomeSquare()  public payable {
+		// probably needs to be payable because you change something in this contract.
+		someSquare = 144;
+	}
+	
+	// function to be called from another contract
+	function getSomePublicValue()  public returns (uint256) {
+		return somePublicValue;
 	}
 }

@@ -45,10 +45,10 @@ describe('Am I Rich Already', () => {
 		
 		[mockWallet, askRootWallet, solveRootWallet, vrfWallet] = provider.getWallets();
 		mockERC20 = await deployMockContract(mockWallet, IERC20.abi);
-		askRootContract = await deployContract(askRootWallet, AmIRichAlready);
 		//askRootContract = await deployContract(askRootWallet, AmIRichAlready, [askRootWallet.address]); // Does not work, yields transaction revert errors
 		solveRootContract = await deployContract(solveRootWallet, SolveContract, [mockERC20.address]);
 		vrfContract = await deployContract(vrfWallet, RandomNumberConsumer);
+		askRootContract = await deployContract(askRootWallet, AmIRichAlready, [vrfContract.address]);
 	});
 
 	// custom test in AskRoot contract
@@ -113,5 +113,11 @@ describe('Am I Rich Already', () => {
 	it('checks solveRootContract calls a function from VRF Contract correctly', async () => {
 		await askRootContract.callUintSmallSquareFromVRFContract(vrfContract.address)
 		expect('returnSomeSquare').to.be.calledOnContract(vrfContract);
+	});
+	
+	
+	// custom test in AskRoot contract for VRF contract
+	it('Check if a Uint16 can be read from the VRF contract.', async () => { 
+		expect(await askRootContract.getVal()).to.be.equal(144);
 	});
 });

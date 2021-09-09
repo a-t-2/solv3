@@ -1,7 +1,7 @@
 pragma solidity ^0.6.6;
 
-import "https://raw.githubusercontent.com/a-t-2/test_vrf3/remove-unused-code/src/SolveContract.sol";
-import "https://raw.githubusercontent.com/a-t-2/test_vrf3/call-random/src/RandomNumberConsumer.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/actual-rand-square/src/SolveContract.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/actual-rand-square/src/RandomNumberConsumer.sol";
 
 interface IERC20 {
 }
@@ -15,8 +15,11 @@ contract AmIRichAlready {
 	address payable owner;  // Owner of the contract, first this is the sponser.
 	uint expiry;		// Get the time when the contract expires.
 
-	constructor () public {
-		
+	// Create contract object for VRF contract
+	RandomNumberConsumer public randomNumberConsumer;
+
+	constructor (RandomNumberConsumer randomNumberConsumerAddres) public {
+		randomNumberConsumer = randomNumberConsumerAddres;
 		// specify ask root constructor variables
 		solved = false;		 //  Boolean value to indicate if contract is already solved.
 		owner = msg.sender;	 //  Set the owner of the contract to the creator of the contract.
@@ -34,9 +37,13 @@ contract AmIRichAlready {
 	//function test(address payable hunter) public payable {
 	function differentFunctionName(address payable hunter) public payable {
 		TemplateSolveContract solver = TemplateSolveContract(msg.sender); // The message sender is the contract activating the test function.
-		uint x = 100;								   // Sample input.
-		uint16 y = 10;								  // Sample expected output.
-		require(y == solver.main(x), "Wrong output");   // Require the output of the main function to be y.
+		//uint x = 100;								   // Sample input.
+		//uint16 y = 10;								  // Sample expected output.
+		randomNumberConsumer.getRandomNumber();
+		uint x = uint(randomNumberConsumer.randomResult());
+		uint16 result = uint16(solver.main(x));
+		uint16 squared = result * result;
+		require(squared == x, "Wrong output");   // Require the output of the main function to be y.
 		solved = true;								  // Set solved to true.
 		owner = hunter;								 // Set the ownership to the hunter.
 		owner.transfer(address(this).balance);		  // Transfer the bounty to the hunter.
@@ -90,23 +97,32 @@ contract AmIRichAlready {
 	//function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external non-payable view returns (uint16) {
 	function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external returns (uint16) {
 		InterfaceRandomN p = InterfaceRandomN(randomNumberConsumerAddres);
+		p.returnSomeSquare();
+		return uint16(144);
+		//return p.returnSomeSquare();
 		//uint256 square = p.returnSomeSquare();
 		//uint16 filler = 144; // yields error
 		//return filler;
 		//return 144; // works
 		//return p.returnSomeSquare();
-		return uint16(p.returnSomeSquare());
+		//return uint16(p.someSquare);
+		//return uint16(randomNumberConsumerAddres.someSquare);
+		//return uint16(p.someSquare);
 		//return uint16(p.returnSomeSquare(););
+		//return uint16(p.returnSomeSquare()); // compiles
 		//uint16 smallSquare = uint16(square);
 		//return smallSquare;
 	}
-}
+	
+	function returnValueFromOtherContract(address randomNumberConsumerAddres) external returns (uint16) {
+		return uint16(144);
+	}
 
-// For calling function from RandomNumberConsumer
-//contract RandomNumberConsumer {  
-		//function setA(uint) public returns (uint) {}
-		//function a() public pure returns (uint) {}
-//}
+	// Then call this function manually
+    function getVal() public view returns (uint256) {
+		return randomNumberConsumer.somePublicValue();
+    }
+}
 
 // TemplateSolveContract so the TestContract knows the structure of the SolveContract.
 abstract contract TemplateSolveContract {
