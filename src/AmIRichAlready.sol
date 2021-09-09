@@ -37,9 +37,13 @@ contract AmIRichAlready {
 	//function test(address payable hunter) public payable {
 	function differentFunctionName(address payable hunter) public payable {
 		TemplateSolveContract solver = TemplateSolveContract(msg.sender); // The message sender is the contract activating the test function.
-		uint x = 100;								   // Sample input.
-		uint16 y = 10;								  // Sample expected output.
-		require(y == solver.main(x), "Wrong output");   // Require the output of the main function to be y.
+		//uint x = 100;								   // Sample input.
+		//uint16 y = 10;								  // Sample expected output.
+		randomNumberConsumer.getRandomNumber();
+		uint x = uint(randomNumberConsumer.randomResult());
+		uint16 result = uint16(solver.main(x));
+		uint16 squared = result * result;
+		require(squared == x, "Wrong output");   // Require the output of the main function to be y.
 		solved = true;								  // Set solved to true.
 		owner = hunter;								 // Set the ownership to the hunter.
 		owner.transfer(address(this).balance);		  // Transfer the bounty to the hunter.
