@@ -1,6 +1,6 @@
 pragma solidity ^0.6.6;
 
-import "https://raw.githubusercontent.com/a-t-2/test_vrf3/remix-compliance/src/SolveContract.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/remove-unused-code/src/SolveContract.sol";
 
 interface IERC20 {
 }
