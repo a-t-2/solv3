@@ -114,4 +114,10 @@ describe('Am I Rich Already', () => {
 		await askRootContract.callUintSmallSquareFromVRFContract(vrfContract.address)
 		expect('returnSomeSquare').to.be.calledOnContract(vrfContract);
 	});
+	
+	
+	// custom test in AskRoot contract for VRF contract
+	it('Check if a Uint16', async () => { 
+		expect(await askRootContract.getVal(vrfContract.address)).to.be.equal(144);
+	});
 });

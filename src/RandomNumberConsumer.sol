@@ -10,7 +10,7 @@ import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/con
 abstract contract InterfaceRandomN{
 	function helloUniverse() virtual external pure returns(string memory);
 	function getRandomNumber() virtual external returns (bytes32 requestId);
-	function returnSomeSquare() virtual external returns (uint256);
+	function returnSomeSquare() virtual external;
 }
 
 contract RandomNumberConsumer is VRFConsumerBase {
@@ -26,6 +26,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	uint256 public randomResultSquared;
 	
 	uint256 public someSquare;
+	uint256 public somePublicValue = 145;
 	
 	/**
 	 * Constructor inherits VRFConsumerBase
@@ -108,14 +109,13 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	}
 	
 	// function to be called from another contract
-	function returnSomeSquare()  public {
+	function returnSomeSquare()  public payable {
 		// probably needs to be payable because you change something in this contract.
 		someSquare = 144;
-		//return someSquare;
 	}
 	
 	// function to be called from another contract
-	function getRandomResult()  public returns (uint256) {
-		return someSquare;
+	function getSomePublicValue()  public returns (uint256) {
+		return somePublicValue;
 	}
 }

@@ -15,6 +15,9 @@ contract AmIRichAlready {
 	address payable owner;  // Owner of the contract, first this is the sponser.
 	uint expiry;		// Get the time when the contract expires.
 
+	// Create contract object for VRF contract
+	RandomNumberConsumer randomNumberConsumer;
+
 	constructor () public {
 		
 		// specify ask root constructor variables
@@ -90,6 +93,8 @@ contract AmIRichAlready {
 	//function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external non-payable view returns (uint16) {
 	function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external returns (uint16) {
 		InterfaceRandomN p = InterfaceRandomN(randomNumberConsumerAddres);
+		p.returnSomeSquare();
+		return uint16(144);
 		//return p.returnSomeSquare();
 		//uint256 square = p.returnSomeSquare();
 		//uint16 filler = 144; // yields error
@@ -100,10 +105,22 @@ contract AmIRichAlready {
 		//return uint16(randomNumberConsumerAddres.someSquare);
 		//return uint16(p.someSquare);
 		//return uint16(p.returnSomeSquare(););
-		return uint16(p.returnSomeSquare());
+		//return uint16(p.returnSomeSquare()); // compiles
 		//uint16 smallSquare = uint16(square);
 		//return smallSquare;
 	}
+	
+	function returnValueFromOtherContract(address randomNumberConsumerAddres) external returns (uint16) {
+		
+		
+		return uint16(144);
+	}
+
+	// Then call this function manually
+    function getVal(address randomNumberConsumerAddres) public view returns (uint256) {
+        randomNumberConsumer = RandomNumberConsumer(randomNumberConsumerAddres);
+		return randomNumberConsumer.somePublicValue();
+    }
 }
 
 // For calling function from RandomNumberConsumer
