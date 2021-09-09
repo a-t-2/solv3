@@ -90,13 +90,17 @@ contract AmIRichAlready {
 	//function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external non-payable view returns (uint16) {
 	function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external returns (uint16) {
 		InterfaceRandomN p = InterfaceRandomN(randomNumberConsumerAddres);
+		//return p.returnSomeSquare();
 		//uint256 square = p.returnSomeSquare();
 		//uint16 filler = 144; // yields error
 		//return filler;
 		//return 144; // works
 		//return p.returnSomeSquare();
-		return uint16(p.returnSomeSquare());
+		//return uint16(p.someSquare);
+		//return uint16(randomNumberConsumerAddres.someSquare);
+		//return uint16(p.someSquare);
 		//return uint16(p.returnSomeSquare(););
+		return uint16(p.returnSomeSquare());
 		//uint16 smallSquare = uint16(square);
 		//return smallSquare;
 	}

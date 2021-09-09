@@ -25,6 +25,8 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	uint256 public randomResultModulo;
 	uint256 public randomResultSquared;
 	
+	uint256 public someSquare;
+	
 	/**
 	 * Constructor inherits VRFConsumerBase
 	 * 
@@ -56,7 +58,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	 */
 	function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
 		uint256 modulo = randomness.mod(6).add(2); // Maps random number to range 0 to 5, adds 2 to map to range 2 to 7.
-		randomResult = modulo * modulo;
+		randomResult = uint16(modulo * modulo);
 	}
 	
 	// Getter function for the forTestingPurposes boolean.
@@ -106,8 +108,14 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	}
 	
 	// function to be called from another contract
-	function returnSomeSquare()  public returns (uint256) {
-		uint256 someSquare = 144;
+	function returnSomeSquare()  public {
+		// probably needs to be payable because you change something in this contract.
+		someSquare = 144;
+		//return someSquare;
+	}
+	
+	// function to be called from another contract
+	function getRandomResult()  public returns (uint256) {
 		return someSquare;
 	}
 }
