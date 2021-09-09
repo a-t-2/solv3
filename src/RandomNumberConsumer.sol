@@ -107,8 +107,8 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	}
 	
 	// function to be called from another contract
-	function returnSomeSquare()  public returns (uint256) {
+	function returnSomeSquare()  public returns (uint256 someSquare) {
 		uint256 someSquare = 144;
-		return someSquare;
+		//return someSquare;
 	}
 }
