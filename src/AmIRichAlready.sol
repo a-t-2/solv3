@@ -1,7 +1,7 @@
 pragma solidity ^0.6.6;
 
-import "https://raw.githubusercontent.com/a-t-2/test_vrf3/remove-unused-code/src/SolveContract.sol";
-import "https://raw.githubusercontent.com/a-t-2/test_vrf3/call-random/src/RandomNumberConsumer.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/actual-rand-square/src/SolveContract.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/actual-rand-square/src/RandomNumberConsumer.sol";
 
 interface IERC20 {
 }
