@@ -87,9 +87,11 @@ contract AmIRichAlready {
 	
 	function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) public returns(uint16 memory) {
 		InterfaceRandomN p = InterfaceRandomN(randomNumberConsumerAddres);
-		uint256 square = p.returnSomeSquare();
-		uint16 smallSquare = uint16(square);
-		return smallSquare;
+		square = p.returnSomeSquare();
+		uint16 filler = 5;
+		return filler;
+		//uint16 smallSquare = uint16(square);
+		//return smallSquare;
 	}
 }
 

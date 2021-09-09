@@ -10,7 +10,7 @@ import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/con
 abstract contract InterfaceRandomN{
 	function helloUniverse() virtual external pure returns(string memory);
 	function getRandomNumber() virtual external returns (bytes32 requestId);
-	function returnSomeSquare() virtual external returns (uint256 memory);
+	function returnSomeSquare() virtual external returns (uint256);
 }
 
 contract RandomNumberConsumer is VRFConsumerBase {
@@ -107,7 +107,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	}
 	
 	// function to be called from another contract
-	function returnSomeSquare()  public returns (uint256 memory) {
+	function returnSomeSquare()  public returns (uint256) {
 		uint256 someSquare = 144;
 		return someSquare;
 	}
