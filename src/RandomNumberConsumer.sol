@@ -55,9 +55,8 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	 * Callback function used by VRF Coordinator
 	 */
 	function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
-		randomResult = randomness;
-		randomResultModulo = randomResult.mod(6).add(2); // Maps random number to range 0 to 5, adds 2 to map to range 2 to 7.
-		randomResultSquared = randomResultModulo * randomResultModulo;
+		uint256 modulo = randomness.mod(6).add(2); // Maps random number to range 0 to 5, adds 2 to map to range 2 to 7.
+		randomResult = modulo * modulo;
 	}
 	
 	// Getter function for the forTestingPurposes boolean.
