@@ -45,7 +45,7 @@ describe('Am I Rich Already', () => {
 		
 		[mockWallet, askRootWallet, solveRootWallet, vrfWallet] = provider.getWallets();
 		mockERC20 = await deployMockContract(mockWallet, IERC20.abi);
-		askRootContract = await deployContract(askRootWallet, AmIRichAlready, [mockERC20.address]);
+		askRootContract = await deployContract(askRootWallet, AmIRichAlready);
 		//askRootContract = await deployContract(askRootWallet, AmIRichAlready, [askRootWallet.address]); // Does not work, yields transaction revert errors
 		solveRootContract = await deployContract(solveRootWallet, SolveContract, [mockERC20.address]);
 		vrfContract = await deployContract(vrfWallet, RandomNumberConsumer);
@@ -74,12 +74,10 @@ describe('Am I Rich Already', () => {
 	
 	// custom test in VRF contract
 	it('checks askRootContract calls a function from SolveRoot correctly and returns the right answer', async () => {
-		expect(await askRootContract.callHelloWord(await solveRootContract.getAddressThis())).to.be.equal('hello World');
-		expect(await askRootContract.callHelloWord('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466')).to.be.equal('hello World');
-		expect(await askRootContract.callHelloWord("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")).to.be.equal('hello World');
-		//expect(await askRootContract.callHelloWord(mockERC20.address)).to.be.equal('THIS SHOULD BE HELLO WORLD');
-		//expect(await askRootContract.callHelloWord(solveRootWallet.address)).to.be.equal('THIS SHOULD BE HELLO WORLD');
-		expect(await askRootContract.callHelloWord(solveRootContract.address)).to.be.equal('hello World');
+		//expect(await askRootContract.callHelloWorld(await solveRootContract.getAddressThis())).to.be.equal('hello World');
+		//expect(await askRootContract.callHelloWorld('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466')).to.be.equal('hello World');
+		//expect(await askRootContract.callHelloWorld("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")).to.be.equal('hello World');
+		expect(await askRootContract.callHelloWorld(solveRootContract.address)).to.be.equal('hello World');
 	});
 	
 	
@@ -87,47 +85,8 @@ describe('Am I Rich Already', () => {
 	it('checks solveRootContract calls a function from SolveRoot correctly', async () => {
 		//await token.balanceOf(wallet.address)
 		//await askRootContract.callHelloWord(solveRootWallet.address)
-		await askRootContract.callHelloWord("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")
-		expect('helloWord').to.be.calledOnContract(solveRootContract);
-	});
-	
-	
-	// custom test in AskRoot contract
-	it('checks solveRootWallet address balance is returned correctly', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('9002'));
-		expect(await solveRootContract.getAddressThis().balance).to.be.equal(9002);
-	});
-
-	it('checks if askRootContract called balanceOf with certain askRootWallet on the ERC20 token', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('999999'));
-		await askRootContract.check();
-		expect('balanceOf').to.be.calledOnContractWith(mockERC20, [askRootWallet.address]);
-	});
-
-	it('returns false if the wallet has less than 1000000 coins', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('999999'));
-		expect(await askRootContract.check()).to.be.equal(false);
-	});
-
-	it('returns true if the wallet has at least 1000000 coins', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('1000000'));
-		expect(await askRootContract.check()).to.be.equal(false);
-	});
-	
-	// custom test
-	it('returns false if the askRootContract test is not solved', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('1000000'));
-		expect(await askRootContract.getSolved()).to.be.equal(false);
+		await askRootContract.callHelloWorld("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")
+		expect('helloWorld').to.be.calledOnContract(solveRootContract);
 	});
 	
 });

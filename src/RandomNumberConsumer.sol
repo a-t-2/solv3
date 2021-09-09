@@ -16,6 +16,8 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	uint256 internal fee;
 	
 	uint256 public randomResult;
+	uint256 public randomResultModulo;
+	uint256 public randomResultSquared;
 	
 	/**
 	 * Constructor inherits VRFConsumerBase
@@ -48,6 +50,8 @@ function getRandomNumber() public returns (bytes32 requestId) {
 	 */
 	function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
 		randomResult = randomness;
+		randomResultModulo = randomResult.mod(6).add(2); // Maps random number to range 0 to 5, adds 2 to map to range 2 to 7.
+		randomResultSquared = randomResultModulo * randomResultModulo;
 	}
 	
 	// Getter function for the forTestingPurposes boolean.

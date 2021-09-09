@@ -10,7 +10,6 @@ use(solidity);
 
 describe('AskRootContract Tests', () => {
   let mockERC20: Contract;
-  let contract: Contract;
   let solveContract: Contract;
   let wallet: Wallet;
   
@@ -21,7 +20,6 @@ describe('AskRootContract Tests', () => {
   beforeEach(async () => {
     [wallet] = new MockProvider().getWallets();
     mockERC20 = await deployMockContract(wallet, IERC20.abi);
-    contract = await deployContract(wallet, AmIRichAlready, [mockERC20.address]);
     solveContract = await deployContract(wallet, SolveContract, [mockERC20.address]);
   });
 
@@ -57,44 +55,6 @@ describe('AskRootContract Tests', () => {
   // custom test in solveContract
   it('Returns the account balance owner(=wallet address) of the SolveRoot contract', async () => {
     expect(await solveContract.getBalance()).to.be.equal(0);
-  });
-
-  // custom test in solveContract
-  it('Returns a mocked balance of 9000 for the account balance owner(=wallet address) of the SolveRoot contract', async () => {
-    await mockERC20.mock.balanceOf
-      .withArgs(wallet.address)
-      .returns(utils.parseEther('9000'));
-	expect(await solveContract.getBalance()).to.be.equal(9000);
-  });
-
-  it('checks if contract called balanceOf with certain wallet on the ERC20 token', async () => {
-    await mockERC20.mock.balanceOf
-      .withArgs(wallet.address)
-      .returns(utils.parseEther('999999'));
-    await contract.check();
-    expect('balanceOf').to.be.calledOnContractWith(mockERC20, [wallet.address]);
-  });
-
-  it('returns false if the wallet has less than 1000000 coins', async () => {
-    await mockERC20.mock.balanceOf
-      .withArgs(wallet.address)
-      .returns(utils.parseEther('999999'));
-    expect(await contract.check()).to.be.equal(false);
-  });
-
-  it('returns true if the wallet has at least 1000000 coins', async () => {
-    await mockERC20.mock.balanceOf
-      .withArgs(wallet.address)
-      .returns(utils.parseEther('1000000'));
-    expect(await contract.check()).to.be.equal(false);
-  });
-  
-  // custom test
-  it('returns false if the contract test is not solved', async () => {
-    await mockERC20.mock.balanceOf
-      .withArgs(wallet.address)
-      .returns(utils.parseEther('1000000'));
-    expect(await contract.getSolved()).to.be.equal(false);
   });
   
 });

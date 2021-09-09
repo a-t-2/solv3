@@ -1,14 +1,12 @@
 pragma solidity ^0.6.6;
 
-import "src/SolveContract.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/remove-unused-code/src/SolveContract.sol";
 
 interface IERC20 {
-	function balanceOf(address account) external view returns (uint256);
 }
 
 contract AmIRichAlready {
 	// define original variables
-	IERC20 private tokenContract;
 	uint public richness = 1000000 * 10 ** 18;
 
 	// define askroot variables
@@ -16,8 +14,7 @@ contract AmIRichAlready {
 	address payable owner;  // Owner of the contract, first this is the sponser.
 	uint expiry;		// Get the time when the contract expires.
 
-	constructor (IERC20 _tokenContract) public {
-		tokenContract = _tokenContract;
+	constructor () public {
 		
 		// specify ask root constructor variables
 		solved = false;		 //  Boolean value to indicate if contract is already solved.
@@ -25,10 +22,6 @@ contract AmIRichAlready {
 		expiry = 1612569800;	//  Unix timestamp of the moment of expiry.
 	}
 
-	function check() public view returns (bool) {
-		uint balance = tokenContract.balanceOf(msg.sender);
-		return balance > richness;
-	}
 
 	// IS THIS NEEDED???: NO
 	function setRichness(uint256 _richness) public {
@@ -80,7 +73,7 @@ contract AmIRichAlready {
 	}
 
 	// Function to call function from SolveContract
-	function callHelloWord(address solveContractAddress) external view returns(string memory) {
+	function callHelloWorld(address solveContractAddress) external view returns(string memory) {
 		InterfaceB b = InterfaceB(solveContractAddress);
 		return b.helloWorld();
 	}

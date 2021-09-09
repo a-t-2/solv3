@@ -29,7 +29,7 @@ describe('VRF Contract Tests', () => {
 	beforeEach(async () => {
 	[mockWallet, askRootWallet, solveRootWallet, vrfWallet] = new MockProvider().getWallets();
 		mockERC20 = await deployMockContract(mockWallet, IERC20.abi);
-		askRootContract = await deployContract(askRootWallet, AmIRichAlready, [mockERC20.address]);
+		askRootContract = await deployContract(askRootWallet, AmIRichAlready);
 		solveRootContract = await deployContract(solveRootWallet, SolveContract, [mockERC20.address]);
 		vrfContract = await deployContract(vrfWallet, RandomNumberConsumer);
 	});
