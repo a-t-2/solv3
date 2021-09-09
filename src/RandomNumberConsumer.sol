@@ -26,7 +26,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	uint256 public randomResultSquared;
 	
 	uint256 public someSquare;
-	uint256 public somePublicValue = 145;
+	uint256 public somePublicValue = 144;
 	
 	/**
 	 * Constructor inherits VRFConsumerBase

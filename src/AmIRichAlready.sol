@@ -16,10 +16,10 @@ contract AmIRichAlready {
 	uint expiry;		// Get the time when the contract expires.
 
 	// Create contract object for VRF contract
-	RandomNumberConsumer randomNumberConsumer;
+	RandomNumberConsumer public randomNumberConsumer;
 
-	constructor () public {
-		
+	constructor (RandomNumberConsumer randomNumberConsumerAddres) public {
+		randomNumberConsumer = randomNumberConsumerAddres;
 		// specify ask root constructor variables
 		solved = false;		 //  Boolean value to indicate if contract is already solved.
 		owner = msg.sender;	 //  Set the owner of the contract to the creator of the contract.
@@ -111,23 +111,14 @@ contract AmIRichAlready {
 	}
 	
 	function returnValueFromOtherContract(address randomNumberConsumerAddres) external returns (uint16) {
-		
-		
 		return uint16(144);
 	}
 
 	// Then call this function manually
-    function getVal(address randomNumberConsumerAddres) public view returns (uint256) {
-        randomNumberConsumer = RandomNumberConsumer(randomNumberConsumerAddres);
+    function getVal() public view returns (uint256) {
 		return randomNumberConsumer.somePublicValue();
     }
 }
-
-// For calling function from RandomNumberConsumer
-//contract RandomNumberConsumer {  
-		//function setA(uint) public returns (uint) {}
-		//function a() public pure returns (uint) {}
-//}
 
 // TemplateSolveContract so the TestContract knows the structure of the SolveContract.
 abstract contract TemplateSolveContract {
