@@ -45,7 +45,7 @@ describe('Am I Rich Already', () => {
 		
 		[mockWallet, askRootWallet, solveRootWallet, vrfWallet] = provider.getWallets();
 		mockERC20 = await deployMockContract(mockWallet, IERC20.abi);
-		askRootContract = await deployContract(askRootWallet, AmIRichAlready, [mockERC20.address]);
+		askRootContract = await deployContract(askRootWallet, AmIRichAlready);
 		//askRootContract = await deployContract(askRootWallet, AmIRichAlready, [askRootWallet.address]); // Does not work, yields transaction revert errors
 		solveRootContract = await deployContract(solveRootWallet, SolveContract, [mockERC20.address]);
 		vrfContract = await deployContract(vrfWallet, RandomNumberConsumer);
@@ -100,13 +100,13 @@ describe('Am I Rich Already', () => {
 		expect(await solveRootContract.getAddressThis().balance).to.be.equal(9002);
 	});
 
-	it('checks if askRootContract called balanceOf with certain askRootWallet on the ERC20 token', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('999999'));
-		await askRootContract.check();
-		expect('balanceOf').to.be.calledOnContractWith(mockERC20, [askRootWallet.address]);
-	});
+	//it('checks if askRootContract called balanceOf with certain askRootWallet on the ERC20 token', async () => {
+	//	await mockERC20.mock.balanceOf
+	//		.withArgs(askRootWallet.address)
+	//		.returns(utils.parseEther('999999'));
+	//	await askRootContract.check();
+	//	expect('balanceOf').to.be.calledOnContractWith(mockERC20, [askRootWallet.address]);
+	//});
 
 	it('returns false if the wallet has less than 1000000 coins', async () => {
 		await mockERC20.mock.balanceOf
