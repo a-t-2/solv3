@@ -54,7 +54,26 @@ describe('VRF Contract Tests', () => {
 		expect(await vrfContract.getForTestingPurposes()).to.be.equal(false);
 	});
 	
-
+	// custom test in vrfContract
+	it('Tests if a hardcoded number is returned', async () => {
+		expect(await vrfContract.getHardcodedNumber()).to.be.equal(121);
+	});
+	
+	// custom test in vrfContract
+	it('Tests if a hardcoded number modulus +2 is returned', async () => {
+		expect(await vrfContract.getHardcodedNumberMod()).to.be.equal(5);
+	});
+	
+	// custom test in vrfContract
+	it('Tests if a hardcoded uint256 number is returned', async () => {
+		expect(await vrfContract.getHardcodedUintNumber()).to.be.equal("18446205110165755834005948204546580960626098221936403173208959885300094367089");
+	});
+	
+	
+	// custom test in vrfContract
+	it('Tests if a hardcoded uint256 number modulus +2 is returned', async () => {
+		expect(await vrfContract.getHardcodedUintNumberMod()).to.be.equal(3);
+	});
 	
 	// custom test in vrfContract
 	it('Tests if a random number is returned', async () => {

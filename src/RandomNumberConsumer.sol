@@ -1,8 +1,14 @@
-pragma solidity 0.6.6;
+pragma solidity ^0.6.6;
 
-import "../chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
+
+import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/contracts/src/v0.6/VRFRequestIDBase.sol";
+import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/contracts/src/v0.6/interfaces/LinkTokenInterface.sol";
+import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/contracts/src/v0.6/vendor/SafeMathChainlink.sol";
+import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/contracts/src/v0.6/VRFConsumerBase.sol";
+//import "https://raw.githubusercontent.com/a-t-2/chainlink/develop/SafeMath.sol";
 
 contract RandomNumberConsumer is VRFConsumerBase {
+	 //using SafeMath for uint256;
 	
 	bool forTestingPurposes;	// Boolean to run test on this contract
 	
@@ -55,9 +61,27 @@ function getRandomNumber() public returns (bytes32 requestId) {
 	}
 	
 	// Getter function for hardcoded random number.
-	function getHardcodedRandomNumber() public view returns (uint){   
+	function getHardcodedNumber() public view returns (uint){   
 		uint hardcodedRandomNumber = 121;
 		return hardcodedRandomNumber;
+	}
+	
+	// Getter function for hardcoded random number.
+	function getHardcodedNumberMod() public view returns (uint){   
+		uint hardcodedRandomNumber = 123;
+		return hardcodedRandomNumber.mod(6).add(2);
+	}
+	
+	// Getter function for hardcoded random number.
+	function getHardcodedUintNumber() public view returns (uint256){   
+		uint256 hardcodedUintNumber = 18446205110165755834005948204546580960626098221936403173208959885300094367089;
+		return hardcodedUintNumber;
+	}
+	
+	// Getter function for hardcoded random number.
+	function getHardcodedUintNumberMod() public view returns (uint256){   
+		uint256 hardcodedUintNumber = 18446205110165755834005948204546580960626098221936403173208959885300094367089;
+		return hardcodedUintNumber.mod(8).add(2);
 	}
 	
 	
