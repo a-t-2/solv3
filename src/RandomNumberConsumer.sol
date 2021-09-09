@@ -9,7 +9,7 @@ import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/con
 
 abstract contract InterfaceRandomN{
 	function helloUniverse() virtual external pure returns(string memory);
-	function getRandomNumber() virtual public returns (bytes32 requestId);
+	function getRandomNumber() virtual external returns (bytes32 requestId);
 }
 
 contract RandomNumberConsumer is VRFConsumerBase {
