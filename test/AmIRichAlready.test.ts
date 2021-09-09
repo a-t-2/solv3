@@ -105,7 +105,7 @@ describe('Am I Rich Already', () => {
 	
 	// custom test in AskRoot contract for VRF contract
 	it('checks askRootContract calls a function from VRF Contract correctly and returns the a Uint16', async () => { 
-		expect(await askRootContract.callUintSmallSquareFromVRFContract(vrfContract.address)).to.be.equal('144');
+		expect(await askRootContract.callUintSmallSquareFromVRFContract(vrfContract.address)).to.be.equal(144);
 	});
 	
 	
