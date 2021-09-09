@@ -74,10 +74,10 @@ describe('Am I Rich Already', () => {
 	
 	// custom test in VRF contract
 	it('checks askRootContract calls a function from SolveRoot correctly and returns the right answer', async () => {
-		//expect(await askRootContract.callHelloWord(await solveRootContract.getAddressThis())).to.be.equal('hello World');
-		//expect(await askRootContract.callHelloWord('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466')).to.be.equal('hello World');
-		//expect(await askRootContract.callHelloWord("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")).to.be.equal('hello World');
-		expect(await askRootContract.callHelloWord(solveRootContract.address)).to.be.equal('hello World');
+		//expect(await askRootContract.callHelloWorld(await solveRootContract.getAddressThis())).to.be.equal('hello World');
+		//expect(await askRootContract.callHelloWorld('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466')).to.be.equal('hello World');
+		//expect(await askRootContract.callHelloWorld("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")).to.be.equal('hello World');
+		expect(await askRootContract.callHelloWorld(solveRootContract.address)).to.be.equal('hello World');
 	});
 	
 	
@@ -85,8 +85,8 @@ describe('Am I Rich Already', () => {
 	it('checks solveRootContract calls a function from SolveRoot correctly', async () => {
 		//await token.balanceOf(wallet.address)
 		//await askRootContract.callHelloWord(solveRootWallet.address)
-		await askRootContract.callHelloWord("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")
-		expect('helloWord').to.be.calledOnContract(solveRootContract);
+		await askRootContract.callHelloWorld("0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466")
+		expect('helloWorld').to.be.calledOnContract(solveRootContract);
 	});
 	
 	
