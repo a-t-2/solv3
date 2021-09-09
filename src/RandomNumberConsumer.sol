@@ -45,7 +45,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	/** 
 	 * Requests randomness from a user-provided seed
 	 */
-function getRandomNumber() public returns (bytes32 requestId) {
+	function getRandomNumber() public returns (bytes32 requestId) {
 		require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
 		return requestRandomness(keyHash, fee);
 	}
@@ -105,4 +105,9 @@ function getRandomNumber() public returns (bytes32 requestId) {
 		return 'hello Universe';
 	}
 	
+	// function to be called from another contract
+	function returnSomeSquare()  public returns (uint256) {
+		uint256 someSquare = 144;
+		return someSquare;
+	}
 }

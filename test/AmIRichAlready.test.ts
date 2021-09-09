@@ -101,4 +101,17 @@ describe('Am I Rich Already', () => {
 		await askRootContract.callHelloUniverse(vrfContract.address)
 		expect('helloUniverse').to.be.calledOnContract(vrfContract);
 	});
+	
+	
+	// custom test in AskRoot contract for VRF contract
+	it('checks askRootContract calls a function from VRF Contract correctly and returns the a Uint16', async () => { 
+		expect(await askRootContract.callHelloUniverse(vrfContract.address)).to.be.equal('144');
+	});
+	
+	
+	// custom test in AskRoot contract for VRF contract
+	it('checks solveRootContract calls a function from VRF Contract correctly', async () => {
+		await askRootContract.callHelloUniverse(vrfContract.address)
+		expect('returnSomeSquare').to.be.calledOnContract(vrfContract);
+	});
 });
