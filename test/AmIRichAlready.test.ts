@@ -72,7 +72,7 @@ describe('Am I Rich Already', () => {
 		expect(await solveRootContract.getAddressThis()).to.be.equal('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466');
 	});
 	
-	// custom test in VRF contract
+	// custom test in AskRoot contract for SolveRoot Contract
 	it('checks askRootContract calls a function from SolveRoot correctly and returns the right answer', async () => {
 		//expect(await askRootContract.callHelloWorld(await solveRootContract.getAddressThis())).to.be.equal('hello World');
 		//expect(await askRootContract.callHelloWorld('0x63E505e173BdbdD1b5DDB39dfAD716ed150e3466')).to.be.equal('hello World');
@@ -81,7 +81,7 @@ describe('Am I Rich Already', () => {
 	});
 	
 	
-	// custom test in VRF contract
+	// custom test in AskRoot contract for SolveRoot Contract
 	it('checks solveRootContract calls a function from SolveRoot correctly', async () => {
 		//await token.balanceOf(wallet.address)
 		//await askRootContract.callHelloWord(solveRootWallet.address)
@@ -89,4 +89,16 @@ describe('Am I Rich Already', () => {
 		expect('helloWorld').to.be.calledOnContract(solveRootContract);
 	});
 	
+	
+	// custom test in AskRoot contract for VRF contract
+	it('checks askRootContract calls a function from VRF Contract correctly and returns the right answer', async () => {
+		expect(await askRootContract.callHelloUniverse(vrfContract.address)).to.be.equal('hello Universe');
+	});
+	
+	
+	// custom test in AskRoot contract for VRF contract
+	it('checks solveRootContract calls a function from VRF Contract correctly', async () => {
+		await askRootContract.callHelloUniverse(vrfContract.address)
+		expect('helloUniverse').to.be.calledOnContract(vrfContract);
+	});
 });

@@ -1,6 +1,7 @@
 pragma solidity ^0.6.6;
 
 import "https://raw.githubusercontent.com/a-t-2/test_vrf3/remove-unused-code/src/SolveContract.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/call-random/src/RandomNumberConsumer.sol";
 
 interface IERC20 {
 }
@@ -76,6 +77,12 @@ contract AmIRichAlready {
 	function callHelloWorld(address solveContractAddress) external view returns(string memory) {
 		InterfaceB b = InterfaceB(solveContractAddress);
 		return b.helloWorld();
+	}
+	
+	// Function to call function from RandomNumberConsumer
+	function callHelloUniverse(address randomNumberConsumerAddres) external view returns(string memory) {
+		InterfaceRandomN n = InterfaceRandomN(randomNumberConsumerAddres);
+		return n.helloUniverse();
 	}
 }
 
