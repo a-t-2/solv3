@@ -76,6 +76,12 @@ describe('VRF Contract Tests', () => {
 	});
 	
 	// custom test in vrfContract
+	it('Tests if a hardcoded uint256 number modulus +2  squared is returned', async () => {
+		expect(await vrfContract.getHardcodedUintNumberModSqured()).to.be.equal(49);
+	});
+	
+	
+	// custom test in vrfContract
 	it('Tests if a random number is returned', async () => {
 		expect(await vrfContract.getRandomNumber()).to.be.equal(7);
 	});

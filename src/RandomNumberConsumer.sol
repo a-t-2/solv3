@@ -84,6 +84,12 @@ function getRandomNumber() public returns (bytes32 requestId) {
 		return hardcodedUintNumber.mod(8).add(2);
 	}
 	
+	// Getter function for hardcoded random number.
+	function getHardcodedUintNumberModSqured() public view returns (uint256){   
+		uint256 hardcodedUintNumber = 18446205110165755834005948204546580960626098221936403173208959885300094367089;
+		uint256 modulo = hardcodedUintNumber.mod(6).add(2);
+		return modulo * modulo;
+	}
 	
 	 //uint public a = 144;
 	//function setA(uint _a) public returns (uint) {
