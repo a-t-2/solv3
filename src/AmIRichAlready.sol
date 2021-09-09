@@ -1,6 +1,6 @@
 pragma solidity ^0.6.6;
 
-import "src/SolveContract.sol";
+import "github/a-t-2/test_vrf3/src/SolveContract.sol";
 
 interface IERC20 {
 	function balanceOf(address account) external view returns (uint256);
