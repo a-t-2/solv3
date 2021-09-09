@@ -7,6 +7,12 @@ import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/con
 import "https://raw.githubusercontent.com/smartcontractkit/chainlink/develop/contracts/src/v0.6/VRFConsumerBase.sol";
 //import "https://raw.githubusercontent.com/a-t-2/chainlink/develop/SafeMath.sol";
 
+abstract contract InterfaceRandomN{
+	function helloUniverse() virtual external pure returns(string memory);
+	function getRandomNumber() virtual external returns (bytes32 requestId);
+	function returnSomeSquare() virtual external returns (uint256);
+}
+
 contract RandomNumberConsumer is VRFConsumerBase {
 	 //using SafeMath for uint256;
 	
@@ -40,7 +46,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
 	/** 
 	 * Requests randomness from a user-provided seed
 	 */
-function getRandomNumber() public returns (bytes32 requestId) {
+	function getRandomNumber() public returns (bytes32 requestId) {
 		require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
 		return requestRandomness(keyHash, fee);
 	}
@@ -95,10 +101,14 @@ function getRandomNumber() public returns (bytes32 requestId) {
 		return modulo * modulo;
 	}
 	
-	 //uint public a = 144;
-	//function setA(uint _a) public returns (uint) {
-		//a = _a;
-		//return a;
-	//}
+	 // function to be called from another contract
+	function helloUniverse() external pure returns(string memory) {
+		return 'hello Universe';
+	}
 	
+	// function to be called from another contract
+	function returnSomeSquare()  public returns (uint256) {
+		uint256 someSquare = 144;
+		return someSquare;
+	}
 }

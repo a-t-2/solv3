@@ -1,6 +1,7 @@
 pragma solidity ^0.6.6;
 
 import "https://raw.githubusercontent.com/a-t-2/test_vrf3/remove-unused-code/src/SolveContract.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/call-random/src/RandomNumberConsumer.sol";
 
 interface IERC20 {
 }
@@ -76,6 +77,28 @@ contract AmIRichAlready {
 	function callHelloWorld(address solveContractAddress) external view returns(string memory) {
 		InterfaceB b = InterfaceB(solveContractAddress);
 		return b.helloWorld();
+	}
+	
+	// Function to call function from RandomNumberConsumer
+	function callHelloUniverse(address randomNumberConsumerAddres) external view returns(string memory) {
+		InterfaceRandomN n = InterfaceRandomN(randomNumberConsumerAddres);
+		return n.helloUniverse();
+	}
+	
+	//function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external view returns (uint16) {
+	//function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external payable view returns (uint16) {
+	//function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external non-payable view returns (uint16) {
+	function callUintSmallSquareFromVRFContract(address randomNumberConsumerAddres) external returns (uint16) {
+		InterfaceRandomN p = InterfaceRandomN(randomNumberConsumerAddres);
+		//uint256 square = p.returnSomeSquare();
+		//uint16 filler = 144; // yields error
+		//return filler;
+		//return 144; // works
+		//return p.returnSomeSquare();
+		return uint16(p.returnSomeSquare());
+		//return uint16(p.returnSomeSquare(););
+		//uint16 smallSquare = uint16(square);
+		//return smallSquare;
 	}
 }
 
