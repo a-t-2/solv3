@@ -1,7 +1,9 @@
 pragma solidity ^0.6.6;
 
-import "github/a-t-2/test_vrf3/src/SolveContract.sol";
+import "https://raw.githubusercontent.com/a-t-2/test_vrf3/remix-compliance/src/SolveContract.sol";
 
+interface IERC20 {
+}
 
 contract AmIRichAlready {
 	// define original variables

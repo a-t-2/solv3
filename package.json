@@ -1,16 +1,16 @@
 {
-  "name": "example-dynamic-mocking-and-testing-calls",
+  "name": "example-basic",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "export NODE_ENV=test && mocha",
-    "build": "waffle",
+    "build": "waffle waffle.json",
     "lint": "eslint '{src,test}/**/*.ts'",
     "lint:fix": "eslint --fix '{src,test}/**/*.ts'"
   },
   "devDependencies": {
-    "@openzeppelin/contracts": "^2.3.1",
+    "@openzeppelin/contracts": "^3.4.2",
     "@types/chai": "^4.2.3",
     "@types/mocha": "^5.2.7",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -18,15 +18,10 @@
     "chai": "^4.3.4",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
-    "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.0.17",
+    "ethereum-waffle": "^3.0.0",
+    "ethers": "4.0.47",
     "mocha": "^7.2.0",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
-  },
-  "dependencies": {
-    "@chainlink/contracts": "^0.6.6",
-    "@chainlink/test-helpers": "0.6.6",
-    "@chainlink/token": "^0.6.6"
   }
 }
