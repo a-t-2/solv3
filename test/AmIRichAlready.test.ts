@@ -89,43 +89,4 @@ describe('Am I Rich Already', () => {
 		expect('helloWorld').to.be.calledOnContract(solveRootContract);
 	});
 	
-	
-	// custom test in AskRoot contract
-	it('checks solveRootWallet address balance is returned correctly', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('9002'));
-		expect(await solveRootContract.getAddressThis().balance).to.be.equal(9002);
-	});
-
-	//it('checks if askRootContract called balanceOf with certain askRootWallet on the ERC20 token', async () => {
-	//	await mockERC20.mock.balanceOf
-	//		.withArgs(askRootWallet.address)
-	//		.returns(utils.parseEther('999999'));
-	//	await askRootContract.check();
-	//	expect('balanceOf').to.be.calledOnContractWith(mockERC20, [askRootWallet.address]);
-	//});
-
-	it('returns false if the wallet has less than 1000000 coins', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('999999'));
-		expect(await askRootContract.check()).to.be.equal(false);
-	});
-
-	it('returns true if the wallet has at least 1000000 coins', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('1000000'));
-		expect(await askRootContract.check()).to.be.equal(false);
-	});
-	
-	// custom test
-	it('returns false if the askRootContract test is not solved', async () => {
-		await mockERC20.mock.balanceOf
-			.withArgs(askRootWallet.address)
-			.returns(utils.parseEther('1000000'));
-		expect(await askRootContract.getSolved()).to.be.equal(false);
-	});
-	
 });

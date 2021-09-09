@@ -56,13 +56,5 @@ describe('AskRootContract Tests', () => {
   it('Returns the account balance owner(=wallet address) of the SolveRoot contract', async () => {
     expect(await solveContract.getBalance()).to.be.equal(0);
   });
-
-  // custom test in solveContract
-  it('Returns a mocked balance of 9000 for the account balance owner(=wallet address) of the SolveRoot contract', async () => {
-    await mockERC20.mock.balanceOf
-      .withArgs(wallet.address)
-      .returns(utils.parseEther('9000'));
-	expect(await solveContract.getBalance()).to.be.equal(9000);
-  });
   
 });
